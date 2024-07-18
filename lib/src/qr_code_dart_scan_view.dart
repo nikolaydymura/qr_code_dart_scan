@@ -175,13 +175,12 @@ class QRCodeDartScanViewState extends State<QRCodeDartScanView> with WidgetsBind
       width: widget.widthPreview,
       height: widget.heightPreview,
       child: Stack(
+        fit: StackFit.expand,
         children: [
           Transform.scale(
             scale: scale,
-            child: Center(
-              child: CameraPreview(
-                controller.cameraController!,
-              ),
+            child: CameraPreview(
+              controller.cameraController!,
             ),
           ),
           if (controller.state.value.typeScan == TypeScan.takePicture) _buildButton(),
