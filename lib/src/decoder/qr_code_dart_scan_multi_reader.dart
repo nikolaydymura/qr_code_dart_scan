@@ -80,10 +80,10 @@ class QRCodeDartScanMultiReader {
       try {
         return reader.decode(image);
         // ignore: empty_catches
-      } catch (e) {
-        if (kDebugMode) {
-          print(e);
-        }
+      } on NotFoundException {
+      } catch (e, t) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: t);
       }
     }
     return null;

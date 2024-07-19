@@ -173,19 +173,15 @@ class QRCodeDartScanViewState extends State<QRCodeDartScanView> with WidgetsBind
     return SizedBox(
       key: Key(controller.state.value.typeCamera.toString()),
       width: widget.widthPreview,
-      height: widget.heightPreview,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Transform.scale(
-            scale: scale,
-            child: CameraPreview(
-              controller.cameraController!,
-            ),
-          ),
-          if (controller.state.value.typeScan == TypeScan.takePicture) _buildButton(),
-          widget.child ?? const SizedBox.shrink(),
-        ],
+      height: widget.widthPreview,
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        clipBehavior: Clip.hardEdge,
+        child: SizedBox(
+          width: widget.widthPreview!,
+          height: widget.widthPreview! * camera.aspectRatio,
+          child: CameraPreview(controller.cameraController!),
+        ),
       ),
     );
   }
